@@ -4,6 +4,7 @@
 	"token": "your-token-lives-here",
 
 	"addToRoleOnJoin": "role-name",
+	"roleRunBotAdminCommands": "staff",
 	"apiToken": "api-bearer-token",
 
 	"webhookAddress": "127.0.0.1",

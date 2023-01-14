@@ -19,6 +19,7 @@
         "discord.js": "^14.7.1",
         "got": "^11.8.3",
         "http": "^0.0.1-security",
+        "js-object-utilities": "^2.1.0",
         "pluralize": "^8.0.0",
         "querystring": "^0.2.1"
     }

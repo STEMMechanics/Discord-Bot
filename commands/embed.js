@@ -14,8 +14,8 @@ module.exports = {
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 	async execute(interaction) {
 		const item = interaction.options.getString('item');
-		if(item == 'rules') {
-			const exampleEmbed = new EmbedBuilder()
+
+		const exampleEmbed = new EmbedBuilder()
 			.setColor(0x0099FF)
 			.setTitle('Some title')
 			.setURL('https://discord.js.org/')
@@ -31,11 +31,9 @@ module.exports = {
 			.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
 			.setImage('https://i.imgur.com/AfFp7pu.png')
 			.setTimestamp()
-			.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+			.setFooter({ text: `Some footer text here ${item}`, iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 		
 			// exampleEmbed
 			return interaction.reply({ embeds: [exampleEmbed] });
-		}
-
 	},
 };

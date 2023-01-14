@@ -1,0 +1,19 @@
+{
+	"clientId": "123456789012345678",
+	"guildId": "123456789012345678",
+	"token": "your-token-lives-here",
+
+	"addToRoleOnJoin": "role-name",
+	"apiToken": "api-bearer-token",
+
+	"webhookAddress": "127.0.0.1",
+	"webhookPort": 3987,
+	"webhookSecret": "your-payload-secret",
+
+	"gameChatChannelId": "123456789012345678",
+
+	"uploadHost": "https://api.drustcraft.com.au",
+	"uploadPort": "443",
+	"uploadPath": "/v1/server/upload",
+	"uploadToken": "1234567890abcdefghijklm"
+}

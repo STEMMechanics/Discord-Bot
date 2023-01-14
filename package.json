@@ -1,0 +1,25 @@
+{
+    "name": "drustcraft-discord",
+    "version": "1.0.0",
+    "description": "The awesome Drustcraft Discord bot",
+    "main": "index.js",
+    "scripts": {
+        "start": "node .",
+        "lint": "eslint .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "Drustcraft",
+        "Discord"
+    ],
+    "author": "STEMMechanics",
+    "license": "MIT",
+    "dependencies": {
+        "crypto": "^1.0.1",
+        "discord.js": "^14.7.1",
+        "got": "^11.8.3",
+        "http": "^0.0.1-security",
+        "pluralize": "^8.0.0",
+        "querystring": "^0.2.1"
+    }
+}

@@ -1,1 +1,2 @@
-# Discord-Bot
+# Drustcraft-Discord
+Drustcraft Discord Bot

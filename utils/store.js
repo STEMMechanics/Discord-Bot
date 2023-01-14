@@ -1,6 +1,6 @@
 const { ModalBuilder } = require('@discordjs/builders');
 const fs = require('fs');
-const objects = require('objects.js');
+const objects = require('./objects.js');
 
 module.exports = {
     filePath: './store.json',

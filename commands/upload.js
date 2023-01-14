@@ -1,4 +1,4 @@
-const { uploadHost, uploadPort, uploadPath, uploadKey } = require('./config.json'); 
+const { uploadHost, uploadPort, uploadPath, uploadKey } = require('../config.json'); 
 var http = require('http');
 const { SlashCommandBuilder } = require('discord.js');
 const { isPlural } = require('pluralize');

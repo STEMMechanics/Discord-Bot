@@ -21,7 +21,6 @@ module.exports = {
             key: 'deploy.key',
             ref: 'origin/main',
             repo: 'https://github.com/STEMMechanics/Drustcraft-Discord',
-            path: '~/discord-bot',
             'post-deploy':
                 'npm install && pm2 reload ecosystem.config.js --env production && pm2 save',
         },

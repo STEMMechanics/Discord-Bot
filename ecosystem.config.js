@@ -15,6 +15,7 @@ module.exports = {
         production: {
             user: 'discordbot',
             host: 'vps.stemmechanics.com.au',
+            port: 49152,
             key: 'deploy.key',
             ref: 'origin/main',
             repo: 'https://github.com/STEMMechanics/Drustcraft-Discord',

@@ -10,12 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2.3.4
         with:
           ref: ${{ github.ref }}
           token: ${{ secrets.GH_PAT }}
-      - name: Git Config
-        run: git config --global --add safe.directory $(realpath .)
       - name: Increment value
         uses: yoichiro/gh-action-increment-value@main
         with:

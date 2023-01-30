@@ -3,8 +3,9 @@ const fs = require("fs")
 const { spawnSync } = require("child_process")
 
 const buildData = fs.readFileSync('build.json');
+let buildJson = {}
 try {
-    let buildJson = JSON.parse(buildData);
+    buildJson = JSON.parse(buildData);
 } catch (error) {
     throw Error('There has been an error parsing the build JSON.')
 }

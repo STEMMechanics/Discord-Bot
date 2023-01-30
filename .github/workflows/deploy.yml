@@ -11,9 +11,6 @@ jobs:
     steps:
       - name: Check out source code
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Increment value
         uses: yoichiro/gh-action-increment-value@main
         with:

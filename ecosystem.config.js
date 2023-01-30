@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: 'discordbot',
+            name: 'stemmech-discordbot',
             script: 'index.js',
             time: true,
             instances: 1,
@@ -20,7 +20,7 @@ module.exports = {
             }],
             key: 'deploy.key',
             ref: 'origin/main',
-            repo: 'https://github.com/STEMMechanics/Drustcraft-Discord',
+            repo: 'https://github.com/STEMMechanics/Discord-Bot',
             path: '/opt/discordbot/',
             'post-deploy':
                 'npm install && pm2 reload ecosystem.config.js --env production && pm2 save',

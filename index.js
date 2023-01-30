@@ -93,79 +93,79 @@ for (const file of webhookFiles) {
     webhooks[webhook.event] = webhook.execute;
 }
 
-client.on('ready', (client) => {
-    const server = http.createServer(function(request, response) {
-        if (request.method == 'POST') {
-            const hmac = crypto.createHmac('sha256', webhookSecret);
-            var body = '';
+// client.on('ready', (client) => {
+//     const server = http.createServer(function(request, response) {
+//         if (request.method == 'POST') {
+//             const hmac = crypto.createHmac('sha256', webhookSecret);
+//             var body = '';
 
-            if (request.headers["x-drustcraft-event"] && request.headers["x-drustcraft-signature"]) {
-                request
-                    .on('data', function (data) {
-                    body += data;
-                    hmac.update(data);
-                    // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
-                    if (body.length > 1e6) {
-                        // FLOOD ATTACK OR FAULTY CLIENT, NUKE REQUEST
-                        request.destroy();
-                    }
-                });
+//             if (request.headers["x-drustcraft-event"] && request.headers["x-drustcraft-signature"]) {
+//                 request
+//                     .on('data', function (data) {
+//                     body += data;
+//                     hmac.update(data);
+//                     // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
+//                     if (body.length > 1e6) {
+//                         // FLOOD ATTACK OR FAULTY CLIENT, NUKE REQUEST
+//                         request.destroy();
+//                     }
+//                 });
 
-                request.on('end', function () {
-                    const hash = hmac.digest('hex');
-                    if (hash === request.headers["x-drustcraft-signature"]) {
-                        var post = {};
+//                 request.on('end', function () {
+//                     const hash = hmac.digest('hex');
+//                     if (hash === request.headers["x-drustcraft-signature"]) {
+//                         var post = {};
                         
-                        try {
-                            if (request.headers['content-type'] == 'application/json') {
-                                post = JSON.parse(body);
-                            } else if (request.headers['content-type'] == 'application/x-www-form-urlencoded') {
-                                post = qs.parse(body);
-                            } else {
-                                response.writeHead(400, { "Content-Type": "text/plain" });
-                                response.end("400 - Bad Request\n");
-                                return;
-                            }
-                        } catch(error) {
-                            console.log('cannot parse webhook body');
-                            console.log(error);
-                            response.writeHead(400, { "Content-Type": "text/plain" });
-                            response.end("400 - Bad Request\n");
-                            return;
-                        }
+//                         try {
+//                             if (request.headers['content-type'] == 'application/json') {
+//                                 post = JSON.parse(body);
+//                             } else if (request.headers['content-type'] == 'application/x-www-form-urlencoded') {
+//                                 post = qs.parse(body);
+//                             } else {
+//                                 response.writeHead(400, { "Content-Type": "text/plain" });
+//                                 response.end("400 - Bad Request\n");
+//                                 return;
+//                             }
+//                         } catch(error) {
+//                             console.log('cannot parse webhook body');
+//                             console.log(error);
+//                             response.writeHead(400, { "Content-Type": "text/plain" });
+//                             response.end("400 - Bad Request\n");
+//                             return;
+//                         }
                         
-                        if (webhooks[request.headers["x-drustcraft-event"]]) {
-                            const webhookResponse = webhooks[request.headers["x-drustcraft-event"]](client, request.headers, post);
+//                         if (webhooks[request.headers["x-drustcraft-event"]]) {
+//                             const webhookResponse = webhooks[request.headers["x-drustcraft-event"]](client, request.headers, post);
 
-                            if (webhookResponse && webhookResponse.json) {
-                                response.writeHead(webhookResponse.status ? webhookResponse.status : 200, { "Content-Type": "application/json" });
-                                response.end(JSON.stringify(webhookResponse.json));
-                            } else {
-                                response.writeHead(200, { "Content-Type": "application/json" });
-                                response.end('{}');
-                            }
-                        } else {
-                            response.writeHead(406, { "Content-Type": "text/plain" });
-                            response.end("406 - Not Acceptable\n");
-                        }
-                    } else {
-                        response.writeHead(400, { "Content-Type": "text/plain" });
-                        response.end("400 - Bad Request\n");
-                    }
-                });
-            } else {
-                response.writeHead(400, { "Content-Type": "text/plain" });
-                response.end("400 - Bad Request\n");
-            }
-        } else {
-            response.writeHead(405, { "Content-Type": "text/plain" });
-            response.end("405 - Method Not Allowed\n");
-        }
-    });
+//                             if (webhookResponse && webhookResponse.json) {
+//                                 response.writeHead(webhookResponse.status ? webhookResponse.status : 200, { "Content-Type": "application/json" });
+//                                 response.end(JSON.stringify(webhookResponse.json));
+//                             } else {
+//                                 response.writeHead(200, { "Content-Type": "application/json" });
+//                                 response.end('{}');
+//                             }
+//                         } else {
+//                             response.writeHead(406, { "Content-Type": "text/plain" });
+//                             response.end("406 - Not Acceptable\n");
+//                         }
+//                     } else {
+//                         response.writeHead(400, { "Content-Type": "text/plain" });
+//                         response.end("400 - Bad Request\n");
+//                     }
+//                 });
+//             } else {
+//                 response.writeHead(400, { "Content-Type": "text/plain" });
+//                 response.end("400 - Bad Request\n");
+//             }
+//         } else {
+//             response.writeHead(405, { "Content-Type": "text/plain" });
+//             response.end("405 - Method Not Allowed\n");
+//         }
+//     });
 
-    server.listen(webhookPort, webhookAddress, () => {
-        console.log(`Webhook server running at http://${webhookAddress}:${webhookPort}/`);
-    });
-});
+//     server.listen(webhookPort, webhookAddress, () => {
+//         console.log(`Webhook server running at http://${webhookAddress}:${webhookPort}/`);
+//     });
+// });
 
 client.login(token);

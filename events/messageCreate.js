@@ -25,6 +25,11 @@ module.exports = {
             // store.save(data);
 
             store.increment(message.author.id + '.messages')
+
+            // Is this in the Weekly-Challenge, remove Participant from all members
+
+            // Is this in the Submit-challenge, download message and content, copy to the admin channel and submit that the user has submitted
+            
         }
     },
 };

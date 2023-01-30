@@ -15,7 +15,7 @@ jobs:
           ref: ${{ github.ref }}
           token: ${{ secrets.GH_PAT }}
       - name: Git Config
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        run: git config --global --add safe.directory $(realpath .)
       - name: Increment value
         uses: yoichiro/gh-action-increment-value@main
         with:

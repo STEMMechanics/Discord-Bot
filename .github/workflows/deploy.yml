@@ -17,7 +17,6 @@ jobs:
       - name: Increment value
         uses: yoichiro/gh-action-increment-value@main
         with:
-          target_directory: ''
           target_file: 'build.json'
           prefix: 'buildNumber":'
           suffix: '}'

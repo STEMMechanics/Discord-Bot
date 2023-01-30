@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
-  paths-ignore:
-    - 'build.json'
+    paths-ignore:
+      - 'build.json'
 jobs:
   increment-build:
     runs-on: ubuntu-latest

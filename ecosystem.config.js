@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: 'drustcraft-discord',
+            name: 'discordbot',
             script: 'index.js',
             time: true,
             instances: 1,

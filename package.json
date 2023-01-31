@@ -1,7 +1,7 @@
 {
-    "name": "drustcraft-discord",
+    "name": "stemmech-discordbot",
     "version": "1.0.0",
-    "description": "The awesome Drustcraft Discord bot",
+    "description": "The awesome STEMMechanics Discord bot",
     "main": "index.js",
     "scripts": {
         "start": "node .",
@@ -9,7 +9,7 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [
-        "Drustcraft",
+        "STEMMechanics",
         "Discord"
     ],
     "author": "STEMMechanics",

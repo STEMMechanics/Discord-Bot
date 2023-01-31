@@ -1,2 +1,2 @@
-# Drustcraft-Discord
-Drustcraft Discord Bot
+# STEMMechanics-DiscordBot
+STEMMechanics Discord Bot

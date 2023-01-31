@@ -5,7 +5,6 @@
 
 	"addToRoleOnJoin": "role-name",
 	"roleRunBotAdminCommands": "staff",
-	"apiToken": "api-bearer-token",
-
+	
 	"gameChatChannelId": "123456789012345678",
 }

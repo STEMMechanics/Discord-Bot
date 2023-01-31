@@ -1,11 +1,11 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { buildNumber } = require('../build.json');
+const { version } = require('../package.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('botversion')
-		.setDescription('Lists the bot build version'),
+		.setDescription('Lists the bot version'),
 	async execute(interaction) {
-		return interaction.reply(`STEMMechanics Discord Bot build ${buildNumber}`);
+		return interaction.reply(`I am version ${version}`);
 	},
 };

@@ -1,26 +1,12 @@
-name: CD
+name: Deploy Latest
 on:
   workflow_dispatch:
-  push:
-    branches: [ main ]
-    paths-ignore:
-      - 'build.json'
+
 jobs:
-  increment-build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Check out source code
-        run: chmod +x ./incrementBuild.js
-      - run: ./incrementBuild.js
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "Automated version bump on merge to main"
-  deploy:
-    needs: increment-build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
 
       - name: Set up SSH
         run: |

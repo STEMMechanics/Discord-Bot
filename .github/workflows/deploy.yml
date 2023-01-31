@@ -1,23 +1,35 @@
 name: CD
 on:
   workflow_dispatch:
+  pull_request:
   push:
     branches: [ main ]
-    paths-ignore:
-      - 'build.json'
+
 jobs:
-  increment-build:
+  increment-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Check out source code
-        run: chmod +x ./incrementBuild.js
-      - run: ./incrementBuild.js
+        uses: actions/checkout@v3
+      
+      - name: Increment major version
+        if: contains(github.event.pull_request.labels.*.name, 'semver: major')
+        run: npm version major
+
+      - name: Increment minor version
+        if: contains(github.event.pull_request.labels.*.name, 'semver: minor')
+        run: npm version minor
+
+      - name: Increment patch version
+        if: contains(github.event.pull_request.labels.*.name, 'semver: patch')
+        run: npm version patch
+
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Automated version bump on merge to main"
+
   deploy:
-    needs: increment-build
+    needs: increment-version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

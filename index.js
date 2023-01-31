@@ -2,9 +2,6 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { REST, Routes, Client, Collection, Events, GatewayIntentBits, Partials } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
-const http = require('http');
-const qs = require('querystring');
-const crypto = require('crypto');
 
 const client = new Client({ 
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.GuildMembers, GatewayIntentBits.MessageContent],

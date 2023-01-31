@@ -1,12 +1,12 @@
-name: Setup
+name: Deploy Latest
 on:
   workflow_dispatch:
 
 jobs:
-  setup:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up SSH
         run: |
@@ -22,6 +22,6 @@ jobs:
       - name: Install PM2
         run: npm i -g pm2
 
-      - name: Setup
-        run: pm2 deploy ecosystem.config.js production setup
+      - name: Deploy
+        run: pm2 deploy ecosystem.config.js production
         

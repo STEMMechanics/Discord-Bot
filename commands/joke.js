@@ -5,6 +5,6 @@ module.exports = {
 		.setName('joke')
 		.setDescription('Tells you a joke'),
 	async execute(interaction) {
-		return interaction.reply(`Have you looked in the mirror?`);
+		return interaction.reply(`I don't know any jokes yet.`);
 	},
 };

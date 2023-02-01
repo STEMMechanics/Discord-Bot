@@ -1,5 +1,6 @@
 const store = require("./../utils/store")
 const { EmbedBuilder } = require("discord.js")
+const { countingGameRulesChannelId } = require("discord.js")
 
 function handleMessage(message) {
 	let death = false
@@ -13,6 +14,8 @@ function handleMessage(message) {
 	if (death) {
 		// temp until we figure out resetting
 		message.delete()
+		store.set("last.user.game.two", "")
+		store.set("last.user.game.one", "")
 	} else {
 		store.load()
 		store.set("last.user.game.two", store.get("last.user.game.one"))
@@ -21,7 +24,10 @@ function handleMessage(message) {
 	}
 }
 
-function gameEmbed(highscore, date) {
+function gameEmbed(highscore, date, slashCommand) {
+
+	let dateString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+
 	let embed = new EmbedBuilder()
 		.setColor("#80FFFF")
 		.setTitle("Counting Chain Game")
@@ -57,7 +63,9 @@ function gameEmbed(highscore, date) {
 			},
 			{
 				"name": "Current Highscore",
-				"value": `${highscore} (As of ${date}.)`
+				"value": `${highscore} (As of ${dateString}.)`
 			}
 		])
+
+	slashCommand.guild.channels.cache[countingGameRulesChannelId].send({ embeds: [embed] })
 }

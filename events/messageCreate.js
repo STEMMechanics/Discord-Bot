@@ -1,5 +1,5 @@
 const objectutils = require('js-object-utilities'); 
-const { countingGameChatChannelId, gameChatChannelId, roleRunBotAdminCommands } = require('../config.json');
+const { roleRunBotAdminCommands } = require('../config.json');
 const store = require('../utils/store.js');
 
 module.exports = {

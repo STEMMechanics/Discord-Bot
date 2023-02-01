@@ -1,0 +1,43 @@
+name: Label Checker
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+      - unlabeled
+
+jobs:
+  check_change_label:
+    name: Check change label
+    runs-on: ubuntu-latest
+    steps:
+      - uses: docker://agilepathway/pull-request-label-checker:latest
+        with:
+          any_of: change/major,change/minor,change/patch,kind/release
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+
+  check_kind_label:
+    name: Check kind label
+    runs-on: ubuntu-latest
+    steps:
+      - uses: docker://agilepathway/pull-request-label-checker:latest
+        with:
+          any_of: kind/bug,kind/cleanup,kind/depreciation,kind/documentation,kind/feature,kind/resource,kind/support,kind/release
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+
+  size-label:
+    if: "!contains(github.event.pull_request.labels.*.name, 'kind/release')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: clear labeling
+        id: clear_label
+        uses: andymckay/labeler@master
+        with:
+          remove-labels: "size/XS, size/S, size/M, size/L, size/XL, size/XXL"
+      - name: size-label
+        uses: "nomadjimbob/size-label-action@master"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        if: steps.clear_label.outcome == 'success'

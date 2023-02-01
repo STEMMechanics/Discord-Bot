@@ -34,7 +34,6 @@ jobs:
       - name: Run YAML Linter
         uses: ibiqlik/action-yamllint@v3
         with:
-          file_or_dir: "**/*.yml"
           config_file: .yamllint
 
       - name: Run Linters

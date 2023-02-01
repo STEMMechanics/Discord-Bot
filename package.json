@@ -1,7 +1,7 @@
 {
-    "name": "drustcraft-discord",
-    "version": "1.0.0",
-    "description": "The awesome Drustcraft Discord bot",
+    "name": "stemmech-discordbot",
+    "version": "1.3.0",
+    "description": "The awesome STEMMechanics Discord bot",
     "main": "index.js",
     "scripts": {
         "start": "node .",
@@ -9,18 +9,15 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [
-        "Drustcraft",
+        "STEMMechanics",
         "Discord"
     ],
     "author": "STEMMechanics",
     "license": "MIT",
     "dependencies": {
-        "crypto": "^1.0.1",
         "discord.js": "^14.7.1",
         "got": "^11.8.3",
-        "http": "^0.0.1-security",
         "js-object-utilities": "^2.1.0",
-        "pluralize": "^8.0.0",
-        "querystring": "^0.2.1"
+        "pluralize": "^8.0.0"
     }
 }

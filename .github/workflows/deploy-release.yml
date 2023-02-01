@@ -1,6 +1,7 @@
-name: Deploy Latest
+name: Deploy Release
 on:
-  workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   deploy:

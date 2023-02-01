@@ -1,5 +1,5 @@
 const objectutils = require('js-object-utilities'); 
-const { gameChatChannelId, roleRunBotAdminCommands } = require('../config.json');
+const { countingGameChatChannelId, gameChatChannelId, roleRunBotAdminCommands } = require('../config.json');
 const store = require('../utils/store.js');
 
 module.exports = {
@@ -15,6 +15,28 @@ module.exports = {
             // store.save(data);
 
             store.increment(message.author.id + '.messages')
+
+			if (message.channelId == countingGameChatChannelId) {
+				let toDelete = false
+				
+				if (message.author.id == store.get("last.user.game.one")) {
+					toDelete = true
+				} else if (message.author.id == store.get("last.user.game.two")) {
+					toDelete = true
+				}
+				
+
+				// i am NOT going to implement OCR (optical character recognition) thank you very much
+
+				if (toDelete) {
+					message.delete()
+				} else {
+					store.load()
+					store.set("last.user.game.two", store.get("last.user.game.one"))
+					store.set("last.user.game.one", message.author.id)
+					store.save()
+				}
+			}
 
             // Is this in the Weekly-Challenge, remove Participant from all members
 

@@ -6,5 +6,7 @@
 	"addToRoleOnJoin": "role-name",
 	"roleRunBotAdminCommands": "staff",
 	
-	"gameChatChannelId": "123456789012345678"
+	"gameChatChannelId": "123456789012345678",
+
+	"countingGameChatChannelId": "123456789012345678"
 }

@@ -1,5 +1,5 @@
 const objectutils = require('js-object-utilities'); 
-const { gameChatChannelId, roleRunBotAdminCommands } = require('../config.json');
+const { countingGameChatChannelId, gameChatChannelId, roleRunBotAdminCommands } = require('../config.json');
 const store = require('../utils/store.js');
 
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
 
             store.increment(message.author.id + '.messages')
 
-			if (message.channelId == gameChatChannelId) {
+			if (message.channelId == countingGameChatChannelId) {
 				let toDelete = false
 				
 				if (message.author.id == store.get("last.user.game.one")) {

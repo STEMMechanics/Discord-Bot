@@ -63,7 +63,7 @@ function gameEmbed(highscore, date, slashCommand) {
 			},
 			{
 				"name": "Current Highscore",
-				"value": `${highscore} (As of ${dateString}.)`
+				"value": `${highscore} (As of ${dateString}.) `
 			}
 		])
 

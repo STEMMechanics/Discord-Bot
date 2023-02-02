@@ -88,7 +88,7 @@ module.exports = {
         .setDescription('The help channel for questions.')
         .setRequired(true)),
     async execute(interaction) {
-      if (interaction.user.roles.cache.has(roleManageGames)) {
+      if (interaction.member.roles.cache.has(roleManageGames)) {
         // const game = {
         //   'info-channel': interaction.options.get('info-channel').value,
         //   'game-channel': interaction.options.get('game-channel').value,

@@ -177,6 +177,31 @@ module.exports = {
 
       return interaction.reply(':no_entry_sign: You don\'t have permission to do that!');
     },
+  }, {
+    /* /countingchain */
+    data: new SlashCommandBuilder()
+      .setName('countingchain')
+      .setDescription('Display results of the counting chain game.'),
+    async execute(interaction) {
+      store.load();
+      const game = store.get('counting-chain', {});
+      const fields = [];
+
+      game.rounds.forEach((round) => {
+        fields.push({
+          name: `${round.highscore} at ${round.date}`,
+          value: `Game was reset cause ${round.reason}`,
+        });
+      });
+
+      const embed = new EmbedBuilder()
+        .setColor('#80FFFF')
+        .setTitle('Counting Chain Game')
+        .setDescription('The goal is to get to the highest number we can!')
+        .addFields(fields);
+
+      return interaction.reply({ embeds: [embed] });
+    },
   }],
   events: [{
     name: 'messageCreate',

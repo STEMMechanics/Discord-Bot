@@ -88,7 +88,7 @@ module.exports = {
         .setDescription('The help channel for questions.')
         .setRequired(true)),
     async execute(interaction) {
-      if (interaction.author.roles.cache.has(roleManageGames)) {
+      if (interaction.user.roles.cache.has(roleManageGames)) {
         const game = {
           'info-channel': interaction.options.get('info-channel').value,
           'game-channel': interaction.options.get('game-channel').value,
@@ -100,7 +100,7 @@ module.exports = {
         store.set('counting-chain', game);
         store.save();
 
-        // displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
+        displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
         return interaction.reply(':white_check_mark: Counting chain game has been setup');
       }
 

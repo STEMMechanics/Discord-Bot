@@ -165,7 +165,7 @@ module.exports = {
             store.set('counting-chain', game);
             store.save();
 
-            displayCountingChainInfo(game, interaction.guild.channels.cache.get(game['info-channel']));
+            displayCountingChainInfo(interaction.guild.channels);
             return interaction.reply(':white_check_mark: Counting chain game has been reset');
           }
 

@@ -1,6 +1,9 @@
-const { countingGameChatChannelId } = require('../config.json');
 const { handleMessage } = require('../features/counting-game');
 const store = require('../utils/store');
+
+// nomadjimbob: config only exists in prod
+// eslint-disable-next-line import/no-unresolved
+const { countingGameChatChannelId } = require('../config.json');
 
 module.exports = {
   name: 'messageCreate',

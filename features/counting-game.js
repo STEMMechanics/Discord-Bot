@@ -1,5 +1,8 @@
 const { EmbedBuilder } = require('discord.js');
 const store = require('../utils/store');
+
+// nomadjimbob: config only exists in prod
+// eslint-disable-next-line import/no-unresolved
 const { countingGameRulesChannelId } = require('../config.json');
 
 function handleMessage(message) {

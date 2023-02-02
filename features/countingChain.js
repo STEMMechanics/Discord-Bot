@@ -57,14 +57,14 @@ const displayCountingChainInfo = async (channelMgr) => {
     },
   ];
 
-  if ('high' in high) {
+  if ('highscore' in high) {
     fields.push({
       name: 'Current Highscore',
       value: `${high.highscore} (As of ${high.date}. Game was reset cause ${high.reason})`,
     });
   }
 
-  if ('high' in last) {
+  if ('highscore' in last) {
     fields.push({
       name: 'Last round',
       value: `${last.highscore} (As of ${last.date}. Game was reset cause ${last.reason})`,

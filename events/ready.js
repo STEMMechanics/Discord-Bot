@@ -1,7 +1,9 @@
 module.exports = {
-  name: 'ready',
-  once: true,
-  async execute() {
-    /* empty */
-  },
+  events: [{
+    name: 'ready',
+    once: true,
+    async execute() {
+      /* empty */
+    },
+  }],
 };

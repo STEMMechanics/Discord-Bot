@@ -1,4 +1,6 @@
 module.exports = {
-  delay: 1800,
-  execute() {},
+  timers: [{
+    delay: 1800,
+    execute() {},
+  }],
 };

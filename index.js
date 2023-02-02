@@ -24,87 +24,80 @@ const client = new Client({
   partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 
-// Load commands
+// load modules
 client.commands = new Collection();
 const commands = [];
-const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs
-  .readdirSync(commandsPath)
-  .filter((file) => file.endsWith('.js'));
+let timers = [];
+const moduleDirectories = [
+  'commands',
+  'events',
+  'features',
+];
 
-commandFiles.forEach((file) => {
-  const filePath = path.join(commandsPath, file);
-
-  // nomadjimbob: files in dir are unknown pre runtime
-  // eslint-disable-next-line import/no-dynamic-require, global-require
-  const command = require(filePath);
-  client.commands.set(command.data.name, command);
-  commands.push(command.data.toJSON());
-});
-
-const rest = new REST({ version: '10' }).setToken(token);
-
-// Send command list
-(async () => {
-  try {
-    // console.log(`Started refreshing ${commands.length} application (/) commands.`);
-
-    // The put method is used to fully refresh all commands in the guild with the current set
-    await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
-      body: commands,
-    });
-
-    // console.log(`Successfully reloaded ${data.length} application (/) commands.`);
-  } catch (error) {
-    // And of course, make sure you catch and log any errors!
-    // console.error(error);
-  }
-})();
-
-// Load events
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs
-  .readdirSync(eventsPath)
-  .filter((file) => file.endsWith('.js'));
-
-eventFiles.forEach((file) => {
-  const filePath = path.join(eventsPath, file);
-
-  // nomadjimbob: files in dir are unknown pre runtime
-  // eslint-disable-next-line import/no-dynamic-require, global-require
-  const event = require(filePath);
-  if (event.once) {
-    client.once(event.name, (...args) => event.execute(...args));
-  } else {
-    client.on(event.name, (...args) => event.execute(...args));
-  }
-});
-
-// Load timers
-client.on('ready', (bot) => {
-  const timersPath = path.join(__dirname, 'timers');
-  const timerFiles = fs
-    .readdirSync(timersPath)
+moduleDirectories.forEach((directory) => {
+  const dirPath = path.join(__dirname, directory);
+  const files = fs
+    .readdirSync(dirPath)
     .filter((file) => file.endsWith('.js'));
 
-  timerFiles.forEach((file) => {
-    const filePath = path.join(timersPath, file);
+  files.forEach((file) => {
+    const filePath = path.join(dirPath, file);
 
     // nomadjimbob: files in dir are unknown pre runtime
     // eslint-disable-next-line import/no-dynamic-require, global-require
-    const timer = require(filePath);
+    const module = require(filePath);
 
-    if (timer.once) {
-      setTimeout(() => {
-        timer.execute(bot, timer.data);
-      }, timer.delay * 1000);
-    } else {
-      timer.execute(bot, timer.data);
-      setInterval(() => {
-        timer.execute(bot, timer.data);
-      }, timer.delay * 1000);
+    if ('commands' in module) {
+      module.commands.forEach((command) => {
+        client.commands.set(command.data.name, command);
+        commands.push(command.data.toJSON());
+      });
+    }
+
+    if ('events' in module) {
+      module.events.forEach((event) => {
+        if (event.once) {
+          client.once(event.name, (...args) => event.execute(...args));
+        } else {
+          client.on(event.name, (...args) => event.execute(...args));
+        }
+      });
+    }
+
+    if ('timers' in module) {
+      timers = timers.concat(module.timers);
     }
   });
+});
+
+// Send command list
+const rest = new REST({ version: '10' }).setToken(token);
+(async () => {
+  try {
+    await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
+      body: commands,
+    });
+  } catch (error) {
+    /* empty */
+  }
+})();
+
+// Ready
+client.on('ready', (bot) => {
+  if (timers.length > 0) {
+    timers.forEach((timer) => {
+      if (timer.once) {
+        setTimeout(() => {
+          timer.execute(bot, timer.data);
+        }, timer.delay * 1000);
+      } else {
+        timer.execute(bot, timer.data);
+        setInterval(() => {
+          timer.execute(bot, timer.data);
+        }, timer.delay * 1000);
+      }
+    });
+  }
 });
 
 client.login(token);

@@ -1,10 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
 const store = require('../utils/store');
 
-// nomadjimbob: config only exists in prod
-// eslint-disable-next-line import/no-unresolved
-const { countingGameRulesChannelId } = require('../config.json');
-
 function handleMessage(message) {
   let death = false;
 
@@ -25,8 +21,8 @@ function handleMessage(message) {
   }
 }
 
-function gameEmbed(highscore, date, reason, slashCommand) {
-  const dateString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+function gameEmbed(highscore, date, reason, channel) {
+  // const dateString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
 
   const embed = new EmbedBuilder()
     .setColor('#80FFFF')
@@ -63,11 +59,11 @@ function gameEmbed(highscore, date, reason, slashCommand) {
       },
       {
         name: 'Current Highscore',
-        value: `${highscore} (As of ${dateString}. Game was reset due to ${reason})`,
+        value: `${highscore} (As of ${date}. Game was reset due to ${reason})`,
       },
     ]);
 
-  slashCommand.guild.channels.cache[countingGameRulesChannelId].send({ embeds: [embed] });
+  channel.send({ embeds: [embed] });
 }
 
 module.exports = {

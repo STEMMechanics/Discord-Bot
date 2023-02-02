@@ -5,7 +5,7 @@ const {
   SlashCommandStringOption,
   SlashCommandChannelOption,
 } = require('discord.js');
-const parseDate = require('../utils/date');
+const { parseDate } = require('../utils/date');
 const store = require('../utils/store');
 
 // nomadjimbob: config only exists in prod

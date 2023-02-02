@@ -44,6 +44,8 @@ jobs:
         
       - name: Update version
         run:
+          git config --global user.name 'STEMMechanics'
+          git config --global user.email 'james@stemmechanics.com.au'
           npm version $VERSION
         env:
           VERSION: ${{ github.event.inputs.release_version }}

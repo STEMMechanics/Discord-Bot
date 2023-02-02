@@ -88,23 +88,23 @@ module.exports = {
         .setDescription('The help channel for questions.')
         .setRequired(true)),
     async execute(interaction) {
-      if (interaction.author.roles.cache.some((role) => role.name === roleManageGames)) {
-        const game = {
-          'info-channel': interaction.options.get('info-channel').value,
-          'game-channel': interaction.options.get('game-channel').value,
-          'help-channel': interaction.options.get('help-channel').value,
-          rounds: [],
-        };
+      // if (interaction.author.roles.cache.some((role) => role.name === roleManageGames)) {
+      const game = {
+        'info-channel': interaction.options.get('info-channel').value,
+        'game-channel': interaction.options.get('game-channel').value,
+        'help-channel': interaction.options.get('help-channel').value,
+        rounds: [],
+      };
 
-        store.load();
-        store.set('counting-chain', game);
-        store.save();
+      store.load();
+      store.set('counting-chain', game);
+      store.save();
 
-        // displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
-        return interaction.reply(':white_check_mark: Counting chain game has been setup');
-      }
+      // displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
+      return interaction.reply(':white_check_mark: Counting chain game has been setup');
+      // }
 
-      return interaction.reply(':no_entry_sign: You don\'t have permission to do that!');
+      // return interaction.reply(':no_entry_sign: You don\'t have permission to do that!');
     },
   }, {
     /* /countingchainreset */

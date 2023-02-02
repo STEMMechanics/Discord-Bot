@@ -50,7 +50,6 @@ moduleDirectories.forEach((directory) => {
     if ('commands' in module) {
       module.commands.forEach((command) => {
         client.commands.set(command.data.name, command);
-        process.stdout.write('set command joke\n');
         commands.push(command.data.toJSON());
       });
     }
@@ -71,6 +70,21 @@ moduleDirectories.forEach((directory) => {
   });
 });
 
+// Setup Interaction Create event
+client.on('interactionCreate', async (interaction) => {
+  if (!interaction.isChatInputCommand()) return;
+
+  const command = interaction.client.commands.get(interaction.commandName);
+
+  if (command) {
+    try {
+      await command.execute(interaction);
+    } catch (error) {
+      /* empty */
+    }
+  }
+});
+
 // Send command list
 const rest = new REST({ version: '10' }).setToken(token);
 (async () => {
@@ -85,6 +99,7 @@ const rest = new REST({ version: '10' }).setToken(token);
 
 // Ready
 client.on('ready', (bot) => {
+  // Set timers
   if (timers.length > 0) {
     timers.forEach((timer) => {
       if (timer.once) {

@@ -5,6 +5,8 @@ on:
     branches:
       - main
   pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -37,6 +39,7 @@ jobs:
         uses: wearerequired/lint-action@v2
         with:
           eslint: true
+          continue_on_error: false
 
   deploy:
     needs: [run-linters]

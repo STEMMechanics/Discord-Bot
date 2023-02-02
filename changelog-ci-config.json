@@ -1,0 +1,40 @@
+{
+  "changelog_type": "pull_request",
+  "header_prefix": "Version:",
+  "commit_changelog": true,
+  "comment_changelog": true,
+  "include_unlabeled_changes": true,
+  "unlabeled_group_title": "Other Changes",
+  "pull_request_title_regex": "^Release",
+  "version_regex": "v?([0-9]{1,3})+[.]+([0-9]{1,3})+[.]+([0-9]{1,3})\\s\\(\\d{4}-\\d{1,2}-\\d{1,2}\\)",
+  "group_config": [
+    {
+      "title": "🐛 Bug Fixes",
+      "labels": ["kind/bug"]
+    },
+    {
+      "title": "⚠️ Changes",
+      "labels": ["kind/resource", "kind/cleanup"]
+    },
+    {
+      "title": "⛔️ Deprecated",
+      "labels": ["kind/deprecation"]
+    },
+    {
+      "title": "🚀 New Features",
+      "labels": ["kind/feature"]
+    },
+    {
+      "title": "🔐 Security",
+      "labels": ["kind/security"]
+    },
+    {
+      "title": "📄 Documentation",
+      "labels": ["kind/documentation"]
+    },
+    {
+      "title": "🧩 Dependency/Test Updates",
+      "labels": ["kind/dependency", "kind/test"]
+    }
+  ]
+}

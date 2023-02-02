@@ -100,7 +100,7 @@ module.exports = {
         store.set('counting-chain', game);
         store.save();
 
-        displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
+        // displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
         return interaction.reply(':white_check_mark: Counting chain game has been setup');
       }
 
@@ -129,11 +129,7 @@ module.exports = {
           const roundDate = parse(interaction.options.get('date').value, 'd/M/y', new Date());
 
           store.load();
-          let game = store.get('counting-chain');
-          if (typeof game === 'undefined') {
-            game = [];
-          }
-
+          const game = store.get('counting-chain', {});
           if ('info-channel' in game) {
             game.rounds.push({
               date: `${roundDate.getYear()}/${roundDate.getMonth()}/${roundDate.getDate()}`,
@@ -162,7 +158,7 @@ module.exports = {
     async execute(message) {
       if (!message.author.bot) {
         store.load();
-        const game = store.get('counting-chain');
+        const game = store.get('counting-chain', {});
         if ('game-channel' in game) {
           if (toString(message.channelId) === game['game-channel']) {
             const messages = message.channel.messages.fetch({ limit: 2 });

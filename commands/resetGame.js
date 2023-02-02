@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, SlashCommandIntegerOption, SlashCommandStringOption } = require('discord.js');
-// const store = require('../utils/store');
+const store = require('../utils/store');
 // const { gameEmbed } = require('../features/counting-game');
 
 module.exports = {
@@ -21,10 +21,10 @@ module.exports = {
   async execute(interaction) {
     // gameEmbed(interaction.options.getInteger('highscore'), interaction.options.getString('date'),
     // interaction.options.getString('reason'), interaction);
-    // store.load();
-    // store.set('last.user.game.one', '');
-    // store.set('last.user.game.two', '');
-    // store.save();
+    store.load();
+    store.set('last.user.game.one', '');
+    store.set('last.user.game.two', '');
+    store.save();
     return interaction.reply('Counting chain reset.');
   },
 };

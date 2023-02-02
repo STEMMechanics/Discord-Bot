@@ -5,7 +5,7 @@ function parseDate(str) {
     if (parts[2].length === 2) {
       parts[2] = `20${parts[2]}`;
     }
-    if (parts[2].length !== 4 || /^-?\d+$/.test(parts[2]) === false || parseInt(parts[2], 10) < 2020 || parseInt(parts[1], 10) > 2025) {
+    if (parts[2].length !== 4 || /^-?\d+$/.test(parts[2]) === false || parseInt(parts[2], 10) < 1970 || parseInt(parts[1], 10) > 2050) {
       return '';
     }
 

@@ -12,9 +12,12 @@ const store = require('../utils/store');
 // eslint-disable-next-line import/no-unresolved
 const { roleManageGames } = require('../config.json');
 
-const displayCountingChainInfo = (game, channel) => {
+const displayCountingChainInfo = async (channelMgr) => {
   let high = {};
   let last = {};
+
+  store.load();
+  const game = store.get('counting-chain', {});
 
   game.rounds.forEach((round) => {
     last = round;
@@ -23,50 +26,70 @@ const displayCountingChainInfo = (game, channel) => {
     }
   });
 
+  const fields = [
+    {
+      name: 'Rule #1',
+      value: "The chain will be made up of GIFs. If there isn't a GIF for the number, you may use a picture.",
+    },
+    {
+      name: 'Rule #2',
+      value: 'The next number must be 1 higher than the previous number.',
+    },
+    {
+      name: 'Rule #3',
+      value: 'All GIFs / Pictures **must comply** with the rules the server already has. (See #rules)',
+    },
+    {
+      name: 'Rule #4',
+      value: 'In order to prevent a 1-user or 2-user game, you can only send your message **once** every 3 messages.\n(E.G. User #1 -> User #2 -> User #3 -> User #1)',
+    },
+    {
+      name: 'When does the chain break?',
+      value: "Just when the rules laid above aren't followed, when the chain breaks, simply start the chain again.",
+    },
+    {
+      name: 'Additional information',
+      value: `Please don't reply to the previous number, to avoid pinging the user. If you have any questions, ask in <#${game['help-channel']}>`,
+    },
+    {
+      name: 'And best of all...',
+      value: 'Have fun!',
+    },
+  ];
+
+  if ('high' in high) {
+    fields.push({
+      name: 'Current Highscore',
+      value: `${high.highscore} (As of ${high.date}. Game was reset cause ${high.reason})`,
+    });
+  }
+
+  if ('high' in last) {
+    fields.push({
+      name: 'Last round',
+      value: `${last.highscore} (As of ${last.date}. Game was reset cause ${last.reason})`,
+    });
+  }
+
   const embed = new EmbedBuilder()
     .setColor('#80FFFF')
     .setTitle('Counting Chain Game')
     .setDescription('The goal is to get to the highest number we can!')
-    .addFields([
-      {
-        name: 'Rule #1',
-        value: "The chain will be made up of GIFs. If there isn't a GIF for the number, you may use a picture.",
-      },
-      {
-        name: 'Rule #2',
-        value: 'The next number must be 1 higher than the previous number.',
-      },
-      {
-        name: 'Rule #3',
-        value: 'All GIFs / Pictures **must comply** with the rules the server already has. (See #rules)',
-      },
-      {
-        name: 'Rule #4',
-        value: 'In order to prevent a 1-user or 2-user game, you can only send your message **once** every 3 messages.\n(E.G. User #1 -> User #2 -> User #3 -> User #1)',
-      },
-      {
-        name: 'When does the chain break?',
-        value: "Just when the rules laid above aren't followed, when the chain breaks, simply start the chain again.",
-      },
-      {
-        name: 'Additional information',
-        value: `Please don't reply to the previous number, to avoid pinging the user. If you have any questions, ask in <#${game['help-channel']}>`,
-      },
-      {
-        name: 'And best of all...',
-        value: 'Have fun!',
-      },
-      {
-        name: 'Current Highscore',
-        value: `${high.highscore} (As of ${high.date}. Game was reset due to ${high.reason})`,
-      },
-      {
-        name: 'Last round',
-        value: `${last.highscore} (As of ${last.date}. Game was reset due to ${last.reason})`,
-      },
-    ]);
+    .addFields(fields);
 
-  channel.send({ embeds: [embed] });
+  if ('status-message' in game && game['status-message'].length > 0) {
+    try {
+      const message = channelMgr.cache.get(game['info-channel']).fetchMessages({ around: game['status-message'], limit: 1 });
+      message.first().edit({ embeds: [embed] });
+      return;
+    } catch (error) {
+      /* empty */
+    }
+  }
+
+  const messageId = await channelMgr.cache.get(game['info-channel']).send({ embeds: [embed] });
+  game['status-message'] = messageId;
+  store.set('counting-chain', game);
 };
 
 module.exports = {
@@ -93,6 +116,7 @@ module.exports = {
           'info-channel': interaction.options.get('info-channel').value,
           'game-channel': interaction.options.get('game-channel').value,
           'help-channel': interaction.options.get('help-channel').value,
+          'status-message': '',
           rounds: [],
         };
 
@@ -100,7 +124,7 @@ module.exports = {
         store.set('counting-chain', game);
         store.save();
 
-        displayCountingChainInfo(game, interaction.guild.channels.cache.get(game['info-channel']));
+        displayCountingChainInfo(interaction.guild.channels);
         return interaction.reply(':white_check_mark: Counting chain game has been setup');
       }
 

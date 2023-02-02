@@ -51,7 +51,7 @@ module.exports = {
     module.exports.load();
     objects.decrement(module.exports.data, key);
     if (save) {
-      module.exists.save();
+      module.exports.save();
     }
   },
   exists(key) {

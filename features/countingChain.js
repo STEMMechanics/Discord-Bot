@@ -89,18 +89,18 @@ module.exports = {
         .setRequired(true)),
     async execute(interaction) {
       if (interaction.member.roles.cache.has(roleManageGames)) {
-        // const game = {
-        //   'info-channel': interaction.options.get('info-channel').value,
-        //   'game-channel': interaction.options.get('game-channel').value,
-        //   'help-channel': interaction.options.get('help-channel').value,
-        //   rounds: [],
-        // };
+        const game = {
+          'info-channel': interaction.options.get('info-channel').value,
+          'game-channel': interaction.options.get('game-channel').value,
+          'help-channel': interaction.options.get('help-channel').value,
+          rounds: [],
+        };
 
-        // store.load();
-        // store.set('counting-chain', game);
-        // store.save();
+        store.load();
+        store.set('counting-chain', game);
+        store.save();
 
-        // displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
+        displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
         return interaction.reply(':white_check_mark: Counting chain game has been setup');
       }
 
@@ -124,7 +124,7 @@ module.exports = {
         .setDescription('The date the chain was broken.')
         .setRequired(true)),
     async execute(interaction) {
-      if (interaction.author.roles.cache.some((role) => role.name === roleManageGames)) {
+      if (interaction.member.roles.cache.has(roleManageGames)) {
         try {
           const roundDate = parse(interaction.options.get('date').value, 'd/M/y', new Date());
 

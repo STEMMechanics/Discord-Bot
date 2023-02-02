@@ -1,5 +1,5 @@
 const { countingGameChatChannelId } = require('../config.json');
-const { handleMessage } = require("./../features/counting-game")
+const { handleMessage } = require('../features/counting-game');
 const store = require('../utils/store');
 
 module.exports = {
@@ -16,8 +16,8 @@ module.exports = {
 
       store.increment(`${message.author.id}.messages`);
 
-      if (message.channelId == countingGameChatChannelId) {
-        handleMessage(message)
+      if (toString(message.channelId) === countingGameChatChannelId) {
+        handleMessage(message);
       }
 
       // Is this in the Weekly-Challenge, remove Participant from all members

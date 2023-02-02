@@ -50,6 +50,7 @@ moduleDirectories.forEach((directory) => {
     if ('commands' in module) {
       module.commands.forEach((command) => {
         client.commands.set(command.data.name, command);
+        process.stdout.write('set command joke\n');
         commands.push(command.data.toJSON());
       });
     }

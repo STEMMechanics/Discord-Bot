@@ -19,11 +19,11 @@ module.exports = {
       .setDescription("PLEASE PLEASE PLEASE PLEASE FORMAT AS DD/MM/YYYY I DON'T HAVE A WAY TO CHECK")
       .setRequired(true)),
   async execute(interaction) {
-    gameEmbed(interaction.options.getInteger('highscore'), interaction.options.getString('date'), interaction.options.getString('reason'), interaction);
-    store.load();
-    store.set('last.user.game.one', '');
-    store.set('last.user.game.two', '');
-    store.save();
+    // gameEmbed(interaction.options.getInteger('highscore'), interaction.options.getString('date'), interaction.options.getString('reason'), interaction);
+    // store.load();
+    // store.set('last.user.game.one', '');
+    // store.set('last.user.game.two', '');
+    // store.save();
     return interaction.reply('Counting chain reset.');
   },
 };

@@ -72,7 +72,7 @@ const displayCountingChainInfo = (game, channel) => {
 module.exports = {
   commands: [{
     /* /countingchainsetup */
-    command: new SlashCommandBuilder()
+    data: new SlashCommandBuilder()
       .setName('countingchainsetup')
       .setDescription('Setup a counting chain game. This will reset any current game.')
       .addChannelOption(new SlashCommandChannelOption()
@@ -108,7 +108,7 @@ module.exports = {
     },
   }, {
     /* /countingchainreset */
-    command: new SlashCommandBuilder()
+    data: new SlashCommandBuilder()
       .setName('countingchainreset')
       .setDescription('Resets the counting chain game.')
       .addIntegerOption(new SlashCommandIntegerOption()

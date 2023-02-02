@@ -87,8 +87,8 @@ const displayCountingChainInfo = async (channelMgr) => {
     }
   }
 
-  const messageId = await channelMgr.cache.get(game['info-channel']).send({ embeds: [embed] });
-  game['status-message'] = messageId;
+  const message = await channelMgr.cache.get(game['info-channel']).send({ embeds: [embed] });
+  game['status-message'] = message.id;
   store.set('counting-chain', game);
 };
 

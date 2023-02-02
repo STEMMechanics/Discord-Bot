@@ -11,7 +11,7 @@ module.exports = {
         try {
           module.exports.data = JSON.parse(fileData);
         } catch (error) {
-          /* empty */
+          process.stderr.write(`${error}\n`);
         }
       } else {
         module.exports.data = {};
@@ -24,7 +24,7 @@ module.exports = {
       JSON.stringify(module.exports.data),
       (error) => {
         if (error) {
-          /* empty */
+          process.stderr.write(`${error}\n`);
         }
       },
     );

@@ -62,8 +62,14 @@ jobs:
           config_file: changelog-ci-config.json
           release_version: ${{ github.event.inputs.release_version }}
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+      - name: Create Release
+        uses: thomaseizinger/create-release@1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: Release v{{ steps.version-match.outputs.group1 }} (${{ env.MY_DATE }})
-        if: github.event_name == 'workflow_dispatch'
+          target_commitish: ${{ github.event.pull_request.merge_commit_sha }}
+          tag_name: v${{ steps.version-match.outputs.group1 }}
+          name: ${{ steps.version-match.outputs.group1 }}
+          draft: false
+          prerelease: false
+          body: ${{ steps.fc.outputs.comment-body }}

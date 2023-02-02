@@ -104,7 +104,7 @@ module.exports = {
         return interaction.reply(':white_check_mark: Counting chain game has been setup');
       }
 
-      // return interaction.reply(':no_entry_sign: You don\'t have permission to do that!');
+      return interaction.reply(':no_entry_sign: You don\'t have permission to do that!');
     },
   }, {
     /* /countingchainreset */

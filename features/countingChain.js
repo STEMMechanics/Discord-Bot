@@ -100,7 +100,7 @@ module.exports = {
         store.set('counting-chain', game);
         store.save();
 
-        // displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
+        displayCountingChainInfo(game, interaction.guild.channels.cache.get(game['info-channel']));
         return interaction.reply(':white_check_mark: Counting chain game has been setup');
       }
 
@@ -140,7 +140,7 @@ module.exports = {
             store.set('counting-chain', game);
             store.save();
 
-            displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
+            displayCountingChainInfo(game, interaction.guild.channels.cache.get(game['info-channel']));
             return interaction.reply(':white_check_mark: Counting chain game has been reset');
           }
 

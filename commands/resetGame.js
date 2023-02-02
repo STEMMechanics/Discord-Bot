@@ -24,6 +24,6 @@ module.exports = {
     store.set('last.user.game.one', '');
     store.set('last.user.game.two', '');
     store.save();
-    interaction.send('Counting chain reset.');
+    return interaction.reply('Counting chain reset.');
   },
 };

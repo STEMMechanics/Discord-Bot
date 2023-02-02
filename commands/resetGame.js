@@ -26,7 +26,7 @@ module.exports = {
       interaction.options.getInteger('highscore'),
       interaction.options.getString('date'),
       interaction.options.getString('reason'),
-      interaction.guild.channels.cache[countingGameRulesChannelId],
+      interaction.guild.channels.cache.get(countingGameRulesChannelId),
     );
     store.load();
     store.set('last.user.game.one', '');

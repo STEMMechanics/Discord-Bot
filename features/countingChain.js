@@ -79,7 +79,7 @@ const displayCountingChainInfo = async (channelMgr) => {
 
   if ('status-message' in game && game['status-message'].length > 0) {
     try {
-      const message = channelMgr.cache.get(game['info-channel']).fetchMessages({ around: game['status-message'], limit: 1 });
+      const message = await channelMgr.cache.get(game['info-channel']).fetchMessages({ around: game['status-message'], limit: 1 });
       message.first().edit({ embeds: [embed] });
       return;
     } catch (error) {

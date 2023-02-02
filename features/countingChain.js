@@ -150,9 +150,8 @@ module.exports = {
         .setRequired(true)),
     async execute(interaction) {
       if (interaction.member.roles.cache.has(roleManageGames)) {
-        try {
-          const roundDate = parseDate(interaction.options.get('date').value);
-
+        const roundDate = parseDate(interaction.options.get('date').value);
+        if (roundDate.length > 0) {
           store.load();
           const game = store.get('counting-chain', {});
           if ('info-channel' in game) {
@@ -170,9 +169,9 @@ module.exports = {
           }
 
           return interaction.reply(':no_entry_sign: The counting chain game has not been setup by me yet');
-        } catch (error) {
-          return interaction.reply(':interrobang: The date you entered seems invalid');
         }
+
+        return interaction.reply(':interrobang: The date you entered seems invalid');
       }
 
       return interaction.reply(':no_entry_sign: You don\'t have permission to do that!');

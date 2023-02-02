@@ -83,6 +83,7 @@ const displayCountingChainInfo = async (channelMgr) => {
       message.first().edit({ embeds: [embed] });
       return;
     } catch (error) {
+      process.stderr.write(`${error}\n`);
       /* empty */
     }
   }

@@ -5,7 +5,7 @@ const {
   SlashCommandStringOption,
   SlashCommandChannelOption,
 } = require('discord.js');
-const parse = require('date-fns/parse');
+const parseDate = require('../utils/date');
 const store = require('../utils/store');
 
 // nomadjimbob: config only exists in prod
@@ -150,13 +150,13 @@ module.exports = {
     async execute(interaction) {
       if (interaction.member.roles.cache.has(roleManageGames)) {
         try {
-          const roundDate = parse(interaction.options.get('date').value, 'd/M/y', new Date());
+          const roundDate = parseDate(interaction.options.get('date').value);
 
           store.load();
           const game = store.get('counting-chain', {});
           if ('info-channel' in game) {
             game.rounds.push({
-              date: `${roundDate.getYear()}/${roundDate.getMonth()}/${roundDate.getDate()}`,
+              date: roundDate,
               highscore: interaction.options.get('highscore').value,
               reason: interaction.options.get('reason').value,
             });

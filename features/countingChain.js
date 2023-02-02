@@ -89,18 +89,18 @@ module.exports = {
         .setRequired(true)),
     async execute(interaction) {
       if (interaction.user.roles.cache.has(roleManageGames)) {
-        const game = {
-          'info-channel': interaction.options.get('info-channel').value,
-          'game-channel': interaction.options.get('game-channel').value,
-          'help-channel': interaction.options.get('help-channel').value,
-          rounds: [],
-        };
+        // const game = {
+        //   'info-channel': interaction.options.get('info-channel').value,
+        //   'game-channel': interaction.options.get('game-channel').value,
+        //   'help-channel': interaction.options.get('help-channel').value,
+        //   rounds: [],
+        // };
 
-        store.load();
-        store.set('counting-chain', game);
-        store.save();
+        // store.load();
+        // store.set('counting-chain', game);
+        // store.save();
 
-        displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
+        // displayCountingChainInfo(game, interaction.channels.cache.get(game['info-channel']));
         return interaction.reply(':white_check_mark: Counting chain game has been setup');
       }
 

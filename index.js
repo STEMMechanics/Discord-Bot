@@ -1,7 +1,12 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const {
-  REST, Routes, Client, Collection, GatewayIntentBits, Partials,
+  REST,
+  Routes,
+  Client,
+  Collection,
+  GatewayIntentBits,
+  Partials,
 } = require('discord.js');
 
 // nomadjimbob: config only exists in prod
@@ -9,9 +14,13 @@ const {
 const { clientId, guildId, token } = require('./config.json');
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.MessageContent],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.MessageContent,
+  ],
   partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 
@@ -19,7 +28,9 @@ const client = new Client({
 client.commands = new Collection();
 const commands = [];
 const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter((file) => file.endsWith('.js'));
+const commandFiles = fs
+  .readdirSync(commandsPath)
+  .filter((file) => file.endsWith('.js'));
 
 commandFiles.forEach((file) => {
   const filePath = path.join(commandsPath, file);
@@ -39,10 +50,9 @@ const rest = new REST({ version: '10' }).setToken(token);
     // console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
     // The put method is used to fully refresh all commands in the guild with the current set
-    await rest.put(
-      Routes.applicationGuildCommands(clientId, guildId),
-      { body: commands },
-    );
+    await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
+      body: commands,
+    });
 
     // console.log(`Successfully reloaded ${data.length} application (/) commands.`);
   } catch (error) {
@@ -53,7 +63,9 @@ const rest = new REST({ version: '10' }).setToken(token);
 
 // Load events
 const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter((file) => file.endsWith('.js'));
+const eventFiles = fs
+  .readdirSync(eventsPath)
+  .filter((file) => file.endsWith('.js'));
 
 eventFiles.forEach((file) => {
   const filePath = path.join(eventsPath, file);
@@ -71,7 +83,9 @@ eventFiles.forEach((file) => {
 // Load timers
 client.on('ready', (bot) => {
   const timersPath = path.join(__dirname, 'timers');
-  const timerFiles = fs.readdirSync(timersPath).filter((file) => file.endsWith('.js'));
+  const timerFiles = fs
+    .readdirSync(timersPath)
+    .filter((file) => file.endsWith('.js'));
 
   timerFiles.forEach((file) => {
     const filePath = path.join(timersPath, file);

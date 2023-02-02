@@ -19,11 +19,15 @@ module.exports = {
     }
   },
   save() {
-    fs.writeFile(module.exports.filePath, JSON.stringify(module.exports.data), (error) => {
-      if (error) {
-        /* empty */
-      }
-    });
+    fs.writeFile(
+      module.exports.filePath,
+      JSON.stringify(module.exports.data),
+      (error) => {
+        if (error) {
+          /* empty */
+        }
+      },
+    );
   },
   get(key, def = undefined) {
     module.exports.load();
@@ -52,6 +56,6 @@ module.exports = {
   },
   exists(key) {
     module.exports.load();
-    return (objects.get(module.exports.data, key) === undefined);
+    return objects.get(module.exports.data, key) === undefined;
   },
 };

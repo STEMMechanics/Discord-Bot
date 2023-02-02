@@ -1,24 +1,31 @@
-const { EmbedBuilder, SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const {
+  EmbedBuilder,
+  SlashCommandBuilder,
+  PermissionFlagsBits,
+} = require('discord.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('embed')
     .setDescription('Embeds text')
-    .addStringOption((option) => option.setName('item')
+    .addStringOption((option) => option
+      .setName('item')
       .setDescription('The item to embed')
       .setRequired(true)
-      .addChoices(
-        { name: 'Rules', value: 'rules' },
-      ))
+      .addChoices({ name: 'Rules', value: 'rules' }))
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
     const item = interaction.options.getString('item');
 
     const exampleEmbed = new EmbedBuilder()
-      .setColor(0x0099FF)
+      .setColor(0x0099ff)
       .setTitle('Some title')
       .setURL('https://discord.js.org/')
-      .setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
+      .setAuthor({
+        name: 'Some name',
+        iconURL: 'https://i.imgur.com/AfFp7pu.png',
+        url: 'https://discord.js.org',
+      })
       .setDescription('Some description here')
       .setThumbnail('https://i.imgur.com/AfFp7pu.png')
       .addFields(
@@ -27,10 +34,17 @@ module.exports = {
         { name: 'Inline field title', value: 'Some value here', inline: true },
         { name: 'Inline field title', value: 'Some value here', inline: true },
       )
-      .addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+      .addFields({
+        name: 'Inline field title',
+        value: 'Some value here',
+        inline: true,
+      })
       .setImage('https://i.imgur.com/AfFp7pu.png')
       .setTimestamp()
-      .setFooter({ text: `Some footer text here ${item}`, iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+      .setFooter({
+        text: `Some footer text here ${item}`,
+        iconURL: 'https://i.imgur.com/AfFp7pu.png',
+      });
 
     // exampleEmbed
     return interaction.reply({ embeds: [exampleEmbed] });

@@ -14,16 +14,18 @@ module.exports = {
   deploy: {
     production: {
       user: 'discordbot',
-      host: [{
-        host: 'vps.stemmechanics.com.au',
-        port: '49152',
-      }],
+      host: [
+        {
+          host: 'vps.stemmechanics.com.au',
+          port: '49152',
+        },
+      ],
       key: 'deploy.key',
       ref: 'origin/main',
       repo: 'https://github.com/STEMMechanics/Discord-Bot',
       path: '/opt/discordbot/',
       'post-deploy':
-                'npm install && pm2 reload ecosystem.config.js --env production && pm2 save',
+        'npm install && pm2 reload ecosystem.config.js --env production && pm2 save',
     },
   },
 };

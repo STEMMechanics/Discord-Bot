@@ -63,10 +63,16 @@ module.exports = {
       } else {
         const lastKey = keyParts.pop();
         const nextLastKey = keyParts.pop();
-        const nextLastObj = keyParts.reduce((a, reduceKey) => a[reduceKey], object);
+        const nextLastObj = keyParts.reduce(
+          (a, reduceKey) => a[reduceKey],
+          object,
+        );
         if (Array.isArray(nextLastObj[nextLastKey])) {
           nextLastObj[nextLastKey].splice(parseInt(lastKey, 10), 1);
-        } else if (typeof nextLastObj[nextLastKey] !== 'undefined' && nextLastObj[nextLastKey] !== null) {
+        } else if (
+          typeof nextLastObj[nextLastKey] !== 'undefined'
+          && nextLastObj[nextLastKey] !== null
+        ) {
           delete nextLastObj[nextLastKey][lastKey];
         }
       }

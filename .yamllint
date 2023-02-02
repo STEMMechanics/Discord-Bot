@@ -1,0 +1,63 @@
+---
+locale: en_US.UTF-8
+
+ignore: |
+    .github/
+    node_modules/
+
+yaml-files:
+    - "*.yaml"
+    - "*.yml"
+    - .yamllint
+
+rules:
+    braces:
+        forbid: true
+    brackets:
+        forbid: false
+    colons:
+        max-spaces-before: 0
+        max-spaces-after: 1
+    commas: enable
+    comments:
+        require-starting-space: true
+        min-spaces-from-content: 2
+        level: warning
+    comments-indentation: disable
+    document-end: disable
+    document-start: disable
+    empty-lines:
+        max: 2
+        max-start: 0
+        max-end: 0
+    empty-values:
+        forbid-in-block-mappings: true
+    float-values:
+        forbid-inf: true
+        forbid-nan: true
+        forbid-scientific-notation: true
+        require-numeral-before-decimal: true
+    hyphens:
+        max-spaces-after: 1
+    indentation:
+        spaces: 4
+        indent-sequences: true
+        check-multi-line-strings: false
+    key-duplicates: enable
+    key-ordering: disable
+    line-length: disable
+    new-line-at-end-of-file: enable
+    new-lines: enable
+    octal-values: disable
+    quoted-strings:
+        quote-type: double
+        required: only-when-needed
+        extra-required:
+            - ^http://
+            - ^https://
+            - ^ftp://
+            - "[\\uE000-\\uEFFF]"
+        allow-quoted-quotes: true
+    trailing-spaces: enable
+    truthy:
+        level: warning

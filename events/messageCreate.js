@@ -1,6 +1,7 @@
 const objectutils = require('js-object-utilities'); 
-const { roleRunBotAdminCommands } = require('../config.json');
+const { countingGameChatChannelId, roleRunBotAdminCommands } = require('../config.json');
 const store = require('../utils/store.js');
+const { handleMessage } = require("./../features/counting-game")
 
 module.exports = {
     name: 'messageCreate',
@@ -15,6 +16,10 @@ module.exports = {
             // store.save(data);
 
             store.increment(message.author.id + '.messages')
+
+			if (message.channelId == countingGameChatChannelId) {
+				handleMessage(message)
+			}
 
             // Is this in the Weekly-Challenge, remove Participant from all members
 

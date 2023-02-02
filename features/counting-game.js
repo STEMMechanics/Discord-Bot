@@ -13,9 +13,7 @@ function handleMessage(message) {
 
 	if (death) {
 		// temp until we figure out resetting
-		message.delete()
-		store.set("last.user.game.two", "")
-		store.set("last.user.game.one", "")
+		message.channel.send("Oops! Looks like you sent two messages in a row.\nThis means this chain has ended and the chain must start anew.\n(This bot can't reset the highscore automatically, just wait for a moderator to do it.)")
 	} else {
 		store.load()
 		store.set("last.user.game.two", store.get("last.user.game.one"))
@@ -24,7 +22,7 @@ function handleMessage(message) {
 	}
 }
 
-function gameEmbed(highscore, date, slashCommand) {
+function gameEmbed(highscore, date, reason, slashCommand) {
 
 	let dateString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
 
@@ -63,9 +61,14 @@ function gameEmbed(highscore, date, slashCommand) {
 			},
 			{
 				"name": "Current Highscore",
-				"value": `${highscore} (As of ${dateString}.) `
+				"value": `${highscore} (As of ${dateString}. Game was reset due to ${reason})`
 			}
 		])
 
 	slashCommand.guild.channels.cache[countingGameRulesChannelId].send({ embeds: [embed] })
+}
+
+module.exports = {
+	gameEmbed: gameEmbed,
+	handleMessage: handleMessage
 }

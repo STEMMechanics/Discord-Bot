@@ -3,7 +3,7 @@ module.exports = {
     name: 'ready',
     once: true,
     async execute() {
-      /* empty */
+      process.stdout.write('Discordbot ready\n');
     },
   }],
 };

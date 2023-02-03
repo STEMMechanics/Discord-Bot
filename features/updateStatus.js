@@ -1,6 +1,6 @@
 module.exports = {
   timers: [{
-    delay: 1800,
+    delay: 10,
     execute(client) {
       const activities = [{
         type: 'PLAYING',

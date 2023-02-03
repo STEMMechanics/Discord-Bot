@@ -224,7 +224,7 @@ module.exports = {
               }
             });
 
-            if (count > 1) {
+            if (count > 100) {
               message.channel.send(`<@${roleManageGames}> it appears that ${message.author.name} has posted twice within 2 messages!`);
             }
           }

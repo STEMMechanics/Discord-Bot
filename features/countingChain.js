@@ -224,10 +224,10 @@ module.exports = {
               }
             });
 
-            const role = await message.guild.roles.fetch(roleManageGames);
+            // const role = await message.guild.roles.fetch(roleManageGames);
 
             if (count > 1) {
-              message.channel.send(`@${role.name} it appears that ${message.member.displayName} has posted twice within 2 messages!`);
+              message.channel.send(`<@&${roleManageGames}> it appears that ${message.member.displayName} has posted twice within 2 messages!`);
             }
           }
         }

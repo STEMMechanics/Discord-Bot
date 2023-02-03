@@ -207,12 +207,17 @@ module.exports = {
     name: 'messageCreate',
     async execute(message) {
       if (!message.author.bot) {
+        process.stdout.write('countingchain: not bot\n');
         store.load();
         const game = store.get('counting-chain', {});
         if ('game-channel' in game) {
+          process.stdout.write('countingchain: game-channel option exists\n');
+          process.stdout.write(`countingchain: game-channel: ${game['game-channel']}\n`);
+          process.stdout.write(`countingchain: message channel id: ${toString(message.channelId)}\n`);
           if (toString(message.channelId) === game['game-channel']) {
             const messages = message.channel.messages.fetch({ limit: 2 });
             messages.forEach((inspectMessage) => {
+              process.stdout.write(`countingchain: message author check: ${inspectMessage.author.id} / ${message.author.id}\n`);
               if (inspectMessage.author.id === message.author.id) {
                 message.channel.send(`<&${roleManageGames}> it appears that ${message.author.name} has posted twice within 2 messages!`);
               }

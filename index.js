@@ -99,6 +99,9 @@ const rest = new REST({ version: '10' }).setToken(token);
 
 // Ready
 client.on('ready', () => {
+  process.stdout.write('discordbot ready\n');
+  process.stdout.write(`${timers}\n`);
+
   // Set timers
   if (timers.length > 0) {
     timers.forEach((timer) => {

@@ -9,7 +9,8 @@ module.exports = {
       max_restarts: 50,
       watch: false,
       max_memory_restart: '1G',
-      log_file: '/opt/discordbot/current/discordbot.log',
+      error_file: '/opt/discordbot/current/discordbot.error.log',
+      out_file: '/opt/discordbot/current/discordbot.out.log',
     },
   ],
   deploy: {

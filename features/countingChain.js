@@ -227,7 +227,7 @@ module.exports = {
             const role = await message.guild.roles.fetch(roleManageGames);
 
             if (count > 1) {
-              message.channel.send(`<@${role.name}> it appears that ${message.member.nickname} has posted twice within 2 messages!`);
+              message.channel.send(`@${role.name} it appears that ${message.member.displayName} has posted twice within 2 messages!`);
             }
           }
         }

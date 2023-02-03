@@ -98,7 +98,7 @@ const rest = new REST({ version: '10' }).setToken(token);
 })();
 
 // Ready
-client.on('ready', (botClient) => {
+client.on('ready', () => {
   process.stdout.write('discordbot ready\n');
 
   // Set timers
@@ -106,12 +106,12 @@ client.on('ready', (botClient) => {
     timers.forEach((timer) => {
       if (timer.once) {
         setTimeout(() => {
-          timer.execute(botClient, timer.data);
+          timer.execute(client, timer.data);
         }, timer.delay * 1000);
       } else {
-        timer.execute(botClient, timer.data);
+        timer.execute(client, timer.data);
         setInterval(() => {
-          timer.execute(botClient, timer.data);
+          timer.execute(client, timer.data);
         }, timer.delay * 1000);
       }
     });

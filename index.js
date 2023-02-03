@@ -98,18 +98,18 @@ const rest = new REST({ version: '10' }).setToken(token);
 })();
 
 // Ready
-client.on('ready', (bot) => {
+client.on('ready', () => {
   // Set timers
   if (timers.length > 0) {
     timers.forEach((timer) => {
       if (timer.once) {
         setTimeout(() => {
-          timer.execute(bot, timer.data);
+          timer.execute(client, timer.data);
         }, timer.delay * 1000);
       } else {
-        timer.execute(bot, timer.data);
+        timer.execute(client, timer.data);
         setInterval(() => {
-          timer.execute(bot, timer.data);
+          timer.execute(client, timer.data);
         }, timer.delay * 1000);
       }
     });

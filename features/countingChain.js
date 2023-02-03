@@ -215,13 +215,18 @@ module.exports = {
           process.stdout.write(`countingchain: game-channel: ${game['game-channel']}\n`);
           process.stdout.write(`countingchain: message channel id: ${message.channel.id}\n`);
           if (message.channel.id === game['game-channel']) {
-            const messages = await message.channel.messages.fetch({ limit: 2 });
+            const messages = await message.channel.messages.fetch({ limit: 3 });
+            let count = 0;
             messages.forEach((inspectMessage) => {
               process.stdout.write(`countingchain: message author check: ${inspectMessage.author.id} / ${message.author.id}\n`);
               if (inspectMessage.author.id === message.author.id) {
-                message.channel.send(`<&${roleManageGames}> it appears that ${message.author.name} has posted twice within 2 messages!`);
+                count += 1;
               }
             });
+
+            if (count > 1) {
+              message.channel.send(`<@${roleManageGames}> it appears that ${message.author.name} has posted twice within 2 messages!`);
+            }
           }
         }
       }

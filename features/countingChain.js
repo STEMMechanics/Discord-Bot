@@ -213,8 +213,8 @@ module.exports = {
         if ('game-channel' in game) {
           process.stdout.write('countingchain: game-channel option exists\n');
           process.stdout.write(`countingchain: game-channel: ${game['game-channel']}\n`);
-          process.stdout.write(`countingchain: message channel id: ${toString(message.channelId)}\n`);
-          if (toString(message.channelId) === game['game-channel']) {
+          process.stdout.write(`countingchain: message channel id: ${toString(message.channel.id)}\n`);
+          if (toString(message.channel.id) === game['game-channel']) {
             const messages = message.channel.messages.fetch({ limit: 2 });
             messages.forEach((inspectMessage) => {
               process.stdout.write(`countingchain: message author check: ${inspectMessage.author.id} / ${message.author.id}\n`);

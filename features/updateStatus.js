@@ -17,7 +17,7 @@ module.exports = {
       },
       ];
 
-      process.stdout.write('Update status\n');
+      process.stdout.write(`${client}\n`);
       const activity = activities[Math.floor(Math.random() * activities.length)];
       process.stdout.write(`${activity.text}\n`);
       client.user.setActivity(activity.text, { type: activity.type });

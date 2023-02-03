@@ -215,7 +215,7 @@ module.exports = {
           process.stdout.write(`countingchain: game-channel: ${game['game-channel']}\n`);
           process.stdout.write(`countingchain: message channel id: ${message.channel.id}\n`);
           if (message.channel.id === game['game-channel']) {
-            const messages = message.channel.messages.fetch({ limit: 2 });
+            const messages = await message.channel.messages.fetch({ limit: 2 });
             messages.forEach((inspectMessage) => {
               process.stdout.write(`countingchain: message author check: ${inspectMessage.author.id} / ${message.author.id}\n`);
               if (inspectMessage.author.id === message.author.id) {

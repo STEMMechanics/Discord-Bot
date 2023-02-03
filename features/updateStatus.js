@@ -3,16 +3,16 @@ module.exports = {
     delay: 10,
     execute(client) {
       const activities = [{
-        type: 'Playing',
+        type: 'playing',
         text: 'with fire',
       }, {
-        type: 'Playing',
+        type: 'playing',
         text: 'with Stop Motion',
       }, {
-        type: 'Playing',
+        type: 'playing',
         text: 'with Green Screens',
       }, {
-        type: 'Playing',
+        type: 'playing',
         text: 'Minecraft',
       },
       ];

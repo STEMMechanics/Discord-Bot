@@ -1,4 +1,4 @@
-<p align="center"><a href="https://stemmechanics.com.au" target="_blank"><img src="https://raw.githubusercontent.com/STEMMechanics/.github/main/stemmechanics-logo.png" width="400" alt="STEMMechanics Logo"></a></p>
+<p align="center"><a href="https://stemmechanics.com.au" target="_blank"><img src="https://raw.githubusercontent.com/STEMMechanics/.github/main/stemmechanics-logo.png" alt="STEMMechanics Logo"></a></p>
 
 # Discord Bot
  

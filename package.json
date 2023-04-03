@@ -19,7 +19,7 @@
         "got": "^12.5.3",
         "js-object-utilities": "^2.1.0",
         "pluralize": "^8.0.0",
-        "prettier": "^2.8.3"
+        "prettier": "^2.8.7"
     },
     "devDependencies": {
         "eslint": "^8.33.0",

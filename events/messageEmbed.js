@@ -17,7 +17,7 @@ module.exports = {
       const trimmedContent = message.content.slice(0, -6);
       const lines = trimmedContent.split('\n');
       const title = lines.shift();
-      const description = trimLines(lines);
+      const description = lines;// trimLines(lines);
       if (description.length === 0) {
         process.stderr.write('description length is 0\n');
         return;

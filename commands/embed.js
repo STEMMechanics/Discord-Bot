@@ -18,7 +18,7 @@ function calculateChoices() {
       const filePath = path.join(dirPath, file);
 
       try {
-        const embedData = JSON.parse(await fs.readFile(filePath, 'utf-8'));
+        const embedData = JSON.parse(await fs.readFile(filePath, { encoding: 'utf-8' }));
         if ('name' in embedData) {
           const { name } = path.parse(file);
           choices.push({ name: embedData.name, value: name });
@@ -53,7 +53,7 @@ module.exports = {
 
       const filePath = path.join(__dirname, `../embeds/${item}.json`);
       try {
-        const embedData = JSON.parse(await fs.readFile(filePath, 'utf-8'));
+        const embedData = JSON.parse(await fs.readFile(filePath, { encoding: 'utf-8' }));
 
         await interaction.deferReply({ ephemeral: true }); // Acknowledge the command privately
         try {

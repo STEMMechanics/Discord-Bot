@@ -51,6 +51,7 @@ moduleDirectories.forEach((directory) => {
       module.commands.forEach((command) => {
         client.commands.set(command.data.name, command);
         commands.push(command.data.toJSON());
+        process.stdout.write(`Added command ${command.data.name}\n`);
       });
     }
 
@@ -61,6 +62,7 @@ moduleDirectories.forEach((directory) => {
         } else {
           client.on(event.name, (...args) => event.execute(...args));
         }
+        process.stdout.write(`Added event listener for ${event.name}\n`);
       });
     }
 

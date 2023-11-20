@@ -6,7 +6,7 @@ const { trimLines } = require('../utils/string');
 
 module.exports = {
   event: [{
-    name: 'message',
+    name: 'messageCreate',
     async execute(message) {
       process.stdout.write('running handler for message\n');
       if (!message.content.endsWith('/embed')) {

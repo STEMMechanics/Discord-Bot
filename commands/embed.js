@@ -48,6 +48,14 @@ module.exports = {
     async execute(interaction) {
       const item = interaction.options.getString('item');
 
+      await interaction.deferReply({ ephemeral: true }); // Acknowledge the command privately
+
+      try {
+        await interaction.deleteReply();
+      } catch (error) {
+        /* nothing */
+      }
+
       const exampleEmbed = new EmbedBuilder()
         .setColor(0x0099ff)
         .setTitle('Some title')
@@ -77,8 +85,7 @@ module.exports = {
           iconURL: 'https://i.imgur.com/AfFp7pu.png',
         });
 
-      // exampleEmbed
-      return interaction.reply({ embeds: [exampleEmbed] });
+      await interaction.channel.send({ embeds: [exampleEmbed] });
     },
   }],
 };

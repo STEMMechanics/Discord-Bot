@@ -18,20 +18,20 @@ function calculateChoices() {
       const filePath = path.join(dirPath, file);
 
       try {
-        const embedData = JSON.parse(await fs.readFile(filePath, { encoding: 'utf-8' }));
+        const embedData = JSON.parse(await fs.readFile(filePath));
         if ('name' in embedData) {
           const { name } = path.parse(file);
           choices.push({ name: embedData.name, value: name });
-          process.stdout.write(`added embed ${file}`);
+          process.stdout.write(`added embed ${file}\n`);
         } else {
-          process.stdout.write(`skipping embed ${file}`);
+          process.stdout.write(`skipping embed ${file}\n`);
         }
       } catch (error) {
-        process.stderr.write(error);
+        process.stderr.write(`${error}\n`);
       }
     });
   } catch (error) {
-    process.stderr.write(error);
+    process.stderr.write(`${error}\n`);
   }
 
   return choices;
@@ -53,7 +53,7 @@ module.exports = {
 
       const filePath = path.join(__dirname, `../embeds/${item}.json`);
       try {
-        const embedData = JSON.parse(await fs.readFile(filePath, { encoding: 'utf-8' }));
+        const embedData = JSON.parse(await fs.readFile(filePath));
 
         await interaction.deferReply({ ephemeral: true }); // Acknowledge the command privately
         try {

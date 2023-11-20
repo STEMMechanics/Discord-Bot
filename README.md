@@ -1,24 +1,21 @@
 <p align="center"><a href="https://stemmechanics.com.au" target="_blank"><img src="https://raw.githubusercontent.com/STEMMechanics/.github/main/stemmechanics-logo.png" alt="STEMMechanics Logo"></a></p>
 
-# Discord Bot
- 
-The STEMMechanics Discord bot is a helpful tool to manage and support the [STEMMechanics Discord channel](https://discord.gg/yNzk4x7mpD).
+# Welcome to the STEMMechanics Discord Bot!
 
-It is a Node.js application using [DiscordJS](https://discord.js.org) to interact with the Discord server.
- 
-## Submitting Pull Requests
-We would love to receive PRs that add functionality and features (module). We ask that all new items be modular and abstracted.
+Our bot is here to make your life easier and support the amazing [STEMMechanics Discord channel](https://discord.gg/yNzk4x7mpD). It's built using Node.js and [DiscordJS](https://discord.js.org/), so you know it's top-notch.
 
-Before adding a new module, we recommend discussing it in our Discord server to ensure that others are aware of your work and provide advice/support.
- 
+## Contributing is easy!
+
+We're so grateful that you're interested in helping out with this project! Check out our [contributions guide](https://www.stemmechanics.com.au/contributions) to get started.
+
+## Let's all play nice!
+
+We want everyone in the STEMMechanics community to feel welcome, so please take a moment to review our [Code of Conduct](https://www.stemmechanics.com.au/contributions#code-of-conduct).
+
+## Security first
+
+Your security is our top priority! That's why we regularly scan our source code using [Snyk](https://snyk.io/test/github/STEMMechanics/Discord-Bot) to make sure everything is up to snuff. If you do happen to find a security vulnerability, please send an email to James Collins at james@stemmechanics.com.au. We'll take care of it as soon as possible.
+
 ## Get in touch!
- 
-Learn more about what we're doing at [stemmechanics.com.au](https://www.stemmechanics.com.au) or on [Discord](https://discord.gg/yNzk4x7mpD).
 
-[Security](https://snyk.io/test/github/STEMMechanics/Discord-Bot)
-
-Say hello to us on:
-
-- [Discord](https://discord.gg/yNzk4x7mpD)
-- [Mastodon - @STEMMechanics](https://mastodon.au/@stemmechanics)
-- [Twitter - @STEMMechanics](https://twitter.com/STEMMechanics)
+Want to learn more about what we're up to? Check out our website at [stemmechanics.com.au](https://www.stemmechanics.com.au) or stop by and say hello on [Discord](https://discord.gg/yNzk4x7mpD). You can also connect with us on [Mastodon - @STEMMechanics](https://mastodon.au/@stemmechanics) and [Twitter - @STEMMechanics](https://twitter.com/STEMMechanics).

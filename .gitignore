@@ -3,6 +3,7 @@
 
 # deploy
 deploy.env
+ecosystem.override.config.js
 
 # discordjs
 config.json

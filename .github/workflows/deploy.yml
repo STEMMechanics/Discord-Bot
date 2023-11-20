@@ -31,8 +31,11 @@ jobs:
       - name: Install PM2
         run: npm i -g pm2
 
-      - name: Deploy
+      - name: Prepare Deployment Config
         run: |
-          sed -i "s/SSH_SERVER_HOST/${{ secrets.SSH_SERVER_HOST }}/g" ecosystem.config.js
-          sed -i "s/SSH_SERVER_PORT/${{ secrets.SSH_SERVER_PORT }}/g" ecosystem.config.js
-          pm2 deploy ecosystem.config.js production
+          cp ecosystem.config.js ecosystem.override.config.js
+          sed -i "s/SSH_SERVER_HOST/${{ secrets.SSH_SERVER_HOST }}/g" ecosystem.override.config.js
+          sed -i "s/SSH_SERVER_PORT/${{ secrets.SSH_SERVER_PORT }}/g" ecosystem.override.config.js
+        
+      - name: Deploy
+        run: pm2 deploy ecosystem.override.config.js production

@@ -8,24 +8,28 @@ const {
 
 function calculateChoices() {
   const choices = [];
-  const dirPath = path.join(__dirname, 'embeds');
-  const files = fs
-    .readdirSync(dirPath)
-    .filter((file) => file.endsWith('.json'));
+  const dirPath = path.join(__dirname, '../embeds');
+  try {
+    const files = fs
+      .readdirSync(dirPath)
+      .filter((file) => file.endsWith('.json'));
 
-  files.forEach(async (file) => {
-    const filePath = path.join(dirPath, file);
+    files.forEach(async (file) => {
+      const filePath = path.join(dirPath, file);
 
-    try {
-      const embedData = JSON.parse(await fs.readFile(filePath, 'utf-8'));
-      if ('name' in embedData) {
-        const { name } = path.parse(file);
-        choices.push({ name: embedData.name, value: name });
+      try {
+        const embedData = JSON.parse(await fs.readFile(filePath, 'utf-8'));
+        if ('name' in embedData) {
+          const { name } = path.parse(file);
+          choices.push({ name: embedData.name, value: name });
+        }
+      } catch (error) {
+        /* nothing */
       }
-    } catch (error) {
-      /* nothing */
-    }
-  });
+    });
+  } catch (error) {
+    /* nothing */
+  }
 
   return choices;
 }

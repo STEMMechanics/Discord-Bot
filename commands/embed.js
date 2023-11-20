@@ -43,7 +43,7 @@ module.exports = {
         .setName('item')
         .setDescription('The item to embed')
         .setRequired(true)
-        .addChoices(calculateChoices()))
+        .addChoices(...calculateChoices()))
       .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
       const item = interaction.options.getString('item');

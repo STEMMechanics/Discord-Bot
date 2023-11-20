@@ -64,12 +64,12 @@ module.exports = {
 
         const embedItem = new EmbedBuilder();
 
-        if ('color' in embedData) embedItem.setColor(parseInt(embedData.color.replace('0x', ''), 16));
+        if ('color' in embedData) embedItem.setColor(embedData.color);
         if ('title' in embedData) embedItem.setTitle(embedData.title);
         if ('url' in embedData) embedItem.setURL(embedData.url);
         if ('description' in embedData) embedItem.setDescription(embedData.description);
 
-        await interaction.channel.send({ embeds: [embedData] });
+        await interaction.channel.send({ embeds: [embedItem] });
       } catch (error) {
         process.stderr.write(`${error}\n`);
         await interaction.reply(`The embed ${item} was not found or is invalid`);

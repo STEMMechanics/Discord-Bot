@@ -18,7 +18,7 @@ function calculateChoices() {
       const filePath = path.join(dirPath, file);
 
       try {
-        const embedData = JSON.parse(await fs.readFile(filePath));
+        const embedData = JSON.parse(await fs.promises.readFile(filePath, 'utf-8'));
         if ('name' in embedData) {
           const { name } = path.parse(file);
           choices.push({ name: embedData.name, value: name });

@@ -33,3 +33,6 @@ jobs:
 
       - name: Deploy
         run: pm2 deploy ecosystem.config.js production
+        env:
+          SSH_SERVER_HOST: ${{secrets.SSH_SERVER_HOST}}
+          SSH_SERVER_POST: ${{secrets.SSH_SERVER_PORT}}

@@ -22,7 +22,7 @@ function calculateChoices() {
         if ('name' in embedData) {
           const { name } = path.parse(file);
           choices.push({ name: embedData.name, value: name });
-          process.stdout.write(`added embed ${file}\n`);
+          process.stdout.write(`added embed ${file} with value ${name}: ${embedData.name}\n`);
         } else {
           process.stdout.write(`skipping embed ${file}\n`);
         }
@@ -53,7 +53,7 @@ module.exports = {
 
       const filePath = path.join(__dirname, `../embeds/${item}.json`);
       try {
-        const embedData = JSON.parse(await fs.readFile(filePath));
+        const embedData = JSON.parse(await fs.promises.readFile(filePath, 'utf-8'));
 
         await interaction.deferReply({ ephemeral: true }); // Acknowledge the command privately
         try {
@@ -71,8 +71,7 @@ module.exports = {
 
         await interaction.channel.send({ embeds: [embedData] });
       } catch (error) {
-        await interaction.reply(error);
-        // await interaction.reply(`The embed ${item} was not found or is invalid`);
+        await interaction.reply(`The embed ${item} was not found or is invalid`);
       }
     },
   }],

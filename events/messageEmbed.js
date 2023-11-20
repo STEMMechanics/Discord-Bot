@@ -8,13 +8,17 @@ module.exports = {
   events: [{
     name: 'message',
     async execute(message) {
-      if (!message.content.endsWith('/embed')) return;
+      if (!message.content.endsWith('/embed')) {
+        process.stdout.write('messages does not end with embed\n');
+        return;
+      }
 
       const trimmedContent = message.content.slice(0, -6).trim();
       const lines = trimmedContent.content.split('\n');
       const title = lines.shift();
       const description = trimLines(lines);
       if (description.length === 0) {
+        process.stdout.write('description length is 0\n');
         return;
       }
 

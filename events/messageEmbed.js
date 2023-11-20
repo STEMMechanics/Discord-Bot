@@ -10,7 +10,7 @@ module.exports = {
     async execute(message) {
       process.stderr.write('running handler for message\n');
       if (!message.content.endsWith('/embed')) {
-        process.stdout.write('messages does not end with embed\n');
+        process.stderr.write('messages does not end with embed\n');
         return;
       }
 
@@ -19,7 +19,7 @@ module.exports = {
       const title = lines.shift();
       const description = trimLines(lines);
       if (description.length === 0) {
-        process.stdout.write('description length is 0\n');
+        process.stderr.write('description length is 0\n');
         return;
       }
 
@@ -31,6 +31,8 @@ module.exports = {
       const announcementChannel = message.client.channels.cache.get(announcementChannelId);
       if (announcementChannel && announcementChannel.isText()) {
         announcementChannel.send(embed);
+      } else {
+        process.stderr.write('announcementChannel null\n');
       }
 
       message.delete();

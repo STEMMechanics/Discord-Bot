@@ -59,7 +59,7 @@ module.exports = {
         try {
           await interaction.deleteReply();
         } catch (error) {
-          /* nothing */
+          process.stderr.write(`${error}\n`);
         }
 
         const embedItem = new EmbedBuilder();
@@ -71,6 +71,7 @@ module.exports = {
 
         await interaction.channel.send({ embeds: [embedData] });
       } catch (error) {
+        process.stderr.write(`${error}\n`);
         await interaction.reply(`The embed ${item} was not found or is invalid`);
       }
     },

@@ -48,9 +48,8 @@ module.exports = {
     async execute(interaction) {
       const item = interaction.options.getString('item');
 
-      const dirPath = path.join(__dirname, '../embeds');
+      const filePath = path.join(__dirname, `../embeds/${item}.json`);
       try {
-        const filePath = path.join(dirPath, `${item}.json`);
         const embedData = JSON.parse(await fs.readFile(filePath, 'utf-8'));
 
         await interaction.deferReply({ ephemeral: true }); // Acknowledge the command privately
@@ -69,7 +68,8 @@ module.exports = {
 
         await interaction.channel.send({ embeds: [embedData] });
       } catch (error) {
-        await interaction.reply(`The embed ${item} was not found or is invalid`);
+        await interaction.reply(error);
+        // await interaction.reply(`The embed ${item} was not found or is invalid`);
       }
     },
   }],

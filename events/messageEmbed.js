@@ -8,6 +8,7 @@ module.exports = {
   event: [{
     name: 'message',
     async execute(message) {
+      process.stdout.write('running handler for message\n');
       if (!message.content.endsWith('/embed')) {
         process.stdout.write('messages does not end with embed\n');
         return;

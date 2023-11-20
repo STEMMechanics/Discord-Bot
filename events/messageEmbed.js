@@ -14,7 +14,7 @@ module.exports = {
         return;
       }
 
-      const trimmedContent = message.content.slice(0, -6).trim();
+      const trimmedContent = message.content.slice(0, -6);
       const lines = trimmedContent.content.split('\n');
       const title = lines.shift();
       const description = trimLines(lines);

@@ -48,44 +48,29 @@ module.exports = {
     async execute(interaction) {
       const item = interaction.options.getString('item');
 
-      await interaction.deferReply({ ephemeral: true }); // Acknowledge the command privately
-
+      const dirPath = path.join(__dirname, '../embeds');
       try {
-        await interaction.deleteReply();
+        const filePath = path.join(dirPath, `${item}.json`);
+        const embedData = JSON.parse(await fs.readFile(filePath, 'utf-8'));
+
+        await interaction.deferReply({ ephemeral: true }); // Acknowledge the command privately
+        try {
+          await interaction.deleteReply();
+        } catch (error) {
+          /* nothing */
+        }
+
+        const embedItem = new EmbedBuilder();
+
+        if ('color' in embedData) embedItem.setColor(embedData.color);
+        if ('title' in embedData) embedItem.setTitle(embedData.title);
+        if ('url' in embedData) embedItem.setURL(embedData.url);
+        if ('description' in embedData) embedItem.setDescription(embedData.description);
+
+        await interaction.channel.send({ embeds: [embedData] });
       } catch (error) {
-        /* nothing */
+        await interaction.reply(`The embed ${item} was not found or is invalid`);
       }
-
-      const exampleEmbed = new EmbedBuilder()
-        .setColor(0x0099ff)
-        .setTitle('Some title')
-        .setURL('https://discord.js.org/')
-        .setAuthor({
-          name: 'Some name',
-          iconURL: 'https://i.imgur.com/AfFp7pu.png',
-          url: 'https://discord.js.org',
-        })
-        .setDescription('Some description here')
-        .setThumbnail('https://i.imgur.com/AfFp7pu.png')
-        .addFields(
-          { name: 'Regular field title', value: 'Some value here' },
-          { name: '\u200B', value: '\u200B' },
-          { name: 'Inline field title', value: 'Some value here', inline: true },
-          { name: 'Inline field title', value: 'Some value here', inline: true },
-        )
-        .addFields({
-          name: 'Inline field title',
-          value: 'Some value here',
-          inline: true,
-        })
-        .setImage('https://i.imgur.com/AfFp7pu.png')
-        .setTimestamp()
-        .setFooter({
-          text: `Some footer text here ${item}`,
-          iconURL: 'https://i.imgur.com/AfFp7pu.png',
-        });
-
-      await interaction.channel.send({ embeds: [exampleEmbed] });
     },
   }],
 };

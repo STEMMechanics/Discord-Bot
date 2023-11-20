@@ -16,8 +16,8 @@ module.exports = {
       user: 'discordbot',
       host: [
         {
-          host: process.env.SSH_SERVER_HOST,
-          port: process.env.SSH_SERVER_PORT,
+          host: SSH_SERVER_HOST,
+          port: SSH_SERVER_PORT,
         },
       ],
       key: 'deploy.key',

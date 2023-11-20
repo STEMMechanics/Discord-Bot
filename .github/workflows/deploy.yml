@@ -32,7 +32,7 @@ jobs:
         run: npm i -g pm2
 
       - name: Deploy
-        run: pm2 deploy ecosystem.config.js production
-        env:
-          SSH_SERVER_HOST: ${{secrets.SSH_SERVER_HOST}}
-          SSH_SERVER_POST: ${{secrets.SSH_SERVER_PORT}}
+        run: |
+          sed -i "s/SSH_SERVER_HOST/${{ secrets.SSH_SERVER_HOST }}/g" ecosystem.config.js
+          sed -i "s/SSH_SERVER_PORT/${{ secrets.SSH_SERVER_PORT }}/g" ecosystem.config.js
+          pm2 deploy ecosystem.config.js production

@@ -36,6 +36,7 @@ module.exports = {
       }
 
       message.delete();
+      process.stderr.write('complete\n');
     },
   }],
 };

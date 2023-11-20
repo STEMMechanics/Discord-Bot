@@ -30,8 +30,8 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
 
-      - name: Copy config.default.js to config.js
-        run: cp config.default.js config.js
+      - name: Copy config.default.json to config.json
+        run: cp config.default.json config.json
 
       - name: YAML Lint
         uses: ibiqlik/action-yamllint@v3

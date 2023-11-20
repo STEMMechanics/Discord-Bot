@@ -5,7 +5,7 @@ const { announcementChannelId } = require('../config.json');
 const { trimLines } = require('../utils/string');
 
 module.exports = {
-  events: [{
+  event: [{
     name: 'message',
     async execute(message) {
       if (!message.content.endsWith('/embed')) {

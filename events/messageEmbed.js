@@ -5,7 +5,7 @@ const { announcementChannelId } = require('../config.json');
 const { trimLines } = require('../utils/string');
 
 module.exports = {
-  event: [{
+  events: [{
     name: 'messageCreate',
     async execute(message) {
       process.stdout.write('running handler for message\n');

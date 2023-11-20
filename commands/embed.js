@@ -22,13 +22,16 @@ function calculateChoices() {
         if ('name' in embedData) {
           const { name } = path.parse(file);
           choices.push({ name: embedData.name, value: name });
+          process.stdout.write(`added embed ${file}`);
+        } else {
+          process.stdout.write(`skipping embed ${file}`);
         }
       } catch (error) {
-        /* nothing */
+        process.stderr.write(error);
       }
     });
   } catch (error) {
-    /* nothing */
+    process.stderr.write(error);
   }
 
   return choices;

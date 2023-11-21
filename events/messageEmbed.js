@@ -21,17 +21,13 @@ module.exports = {
           return;
         }
 
-        process.stderr.write(lines.join('\n'));
-        process.stderr.write(description.join('\n'));
-
         const embed = new EmbedBuilder()
-          .setColor(0x000000)
           .setTitle(title)
           .setDescription(description.join('\n'));
 
         const announcementChannel = message.client.channels.cache.get(announcementChannelId);
         if (announcementChannel && announcementChannel.isTextBased()) {
-          announcementChannel.send(embed);
+          announcementChannel.send({ embeds: [embed] });
         }
 
         message.delete();

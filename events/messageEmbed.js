@@ -21,6 +21,9 @@ module.exports = {
           return;
         }
 
+        process.stderr.write(lines.join('\n'));
+        process.stderr.write(description.join('\n'));
+
         const embed = new EmbedBuilder()
           .setColor(0x000000)
           .setTitle(title)
